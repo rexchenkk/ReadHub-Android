@@ -1,4 +1,4 @@
-package com.ottd.libs.cache;
+package com.rexonchen.readhub.utils.cache;
 
 
 public interface GetCacheCallback {

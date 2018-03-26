@@ -1,13 +1,8 @@
-package com.ottd.libs.cache;
+package com.rexonchen.readhub.utils.cache;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-
-
-import com.ottd.libs.utils.APKUtils;
-import com.ottd.libs.utils.MD5;
-import com.ottd.libs.utils.TextUtils;
-
+import com.rexonchen.readhub.utils.*;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;

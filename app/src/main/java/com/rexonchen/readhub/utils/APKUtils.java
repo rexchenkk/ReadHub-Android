@@ -1,4 +1,4 @@
-package com.ottd.libs.utils;
+package com.rexonchen.readhub.utils;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;

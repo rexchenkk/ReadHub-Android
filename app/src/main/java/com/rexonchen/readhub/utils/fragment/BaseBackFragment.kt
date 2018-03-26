@@ -1,7 +1,24 @@
 package com.rexonchen.readhub.utils.fragment
 
+import android.os.Bundle
+import me.yokeyword.fragmentation_swipeback.SwipeBackFragment
+
 /**
- * Created by rexonchen on 2018/3/22.
+ * Created by YoKeyword on 16/2/7.
  */
-class BaseBackFragment {
+open class BaseBackFragment : SwipeBackFragment() {
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        setParallaxOffset(0.5f)
+    }
+
+    override fun onSupportVisible() {
+        super.onSupportVisible()
+        //        StatHelper.reportFragmentShow(this.getClass().getName());
+    }
+
+    companion object {
+        private val TAG = "Fragmentation"
+    }
 }

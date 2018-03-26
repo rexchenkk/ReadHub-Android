@@ -1,4 +1,4 @@
-package com.ottd.libs.cache;
+package com.rexonchen.readhub.utils.cache;
 
 /**
  * Created by hardyshi on 2017/9/15.

@@ -1,9 +1,7 @@
-package com.ottd.libs.cache;
+package com.rexonchen.readhub.utils.cache;
 
 import android.support.annotation.NonNull;
 import android.util.LruCache;
-
-import com.ottd.libs.cache.CacheItem;
 
 /**
  * Created by hardyshi on 2017/9/15.

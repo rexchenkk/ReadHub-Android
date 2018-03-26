@@ -9,6 +9,7 @@ import android.provider.Settings
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import com.rexonchen.readhub.R
 
 
 class PermissionsActivity : AppCompatActivity() {
@@ -25,7 +26,7 @@ class PermissionsActivity : AppCompatActivity() {
         if (intent == null || !intent.hasExtra(EXTRA_PERMISSIONS)) {
             throw RuntimeException("PermissionsActivity需要使用静态startActivityForResult方法启动!")
         }
-        setContentView(R.layout.com_bihe0832_common_permissions_activity)
+        setContentView(R.layout.permissions_activity)
 
         mChecker = PermissionsChecker(this)
         isRequireCheck = true

@@ -5,6 +5,6 @@ import android.view.View
 /**
  * Created by rexonchen on 2018/3/26.
  */
-class NewsViedHolder(itemView:View?):RecyclerView.ViewHolder(itemView) {
+class NewsViewHolder(itemView:View?):RecyclerView.ViewHolder(itemView) {
     fun <T>bind(item:T,onBind:View.(T)->Unit)=itemView.onBind(item)
 }
