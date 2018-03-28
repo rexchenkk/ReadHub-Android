@@ -11,23 +11,23 @@ import com.rexonchen.readhub.model.entity.NewsList
 class NewsRepository private constructor(private val mDatabase:AppDatabase){
 
     private val mObservableNews: MediatorLiveData<List<News>> = MediatorLiveData()
-    private val mObservableNewsList:MediatorLiveData<NewsList> = MediatorLiveData()
+//    private val mObservableNewsList:MediatorLiveData<List<News>> = MediatorLiveData()
     init {
         mObservableNews.addSource(mDatabase.newsDao().getAllNews()) { newsEntities ->
             if (mDatabase.getDatabaseCreated().value != null) {
                 mObservableNews.postValue(newsEntities)
             }
         }
-        mObservableNewsList.addSource(mDatabase.newsListDao().getNewsList()){ newNewsList->
-            mObservableNewsList.postValue(newNewsList)
-        }
+//        mObservableNewsList.addSource(mDatabase.newsListDao().getNewsList()){ newNewsList->
+//            mObservableNewsList.postValue(newNewsList)
+//        }
     }
 
     fun getAllNews(): LiveData<List<News>> = mObservableNews
 
     fun getNews(NewsId:Long):LiveData<News> = mDatabase.newsDao().getNews(NewsId)
 
-    fun getNewsList():LiveData<NewsList> = mObservableNewsList
+//    fun getNewsList():LiveData<List<News>> = mObservableNewsList
 
 
     companion object {

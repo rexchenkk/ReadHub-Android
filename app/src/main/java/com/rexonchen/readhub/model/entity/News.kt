@@ -6,18 +6,18 @@ import android.arch.persistence.room.PrimaryKey
 /**
  * Created by rexonchen on 2018/3/21.
  */
-@Entity
+@Entity(tableName = "news")
 data class News(
         @PrimaryKey
-        val id:Long,
-        val title:String,
-        val summary:String,
-        val summaryAuto:String,
-        val url:String,
-        val mobileUrl:String?,
-        val siteName:String,
-        val siteSlug:String,
-        val language: String,
-        val authorName:String,
-        val publishDate:String
+        var id:Long,
+        var title:String,
+        var summary:String,
+        var summaryAuto:String,
+        var url:String,
+        var mobileUrl:String?,
+        var siteName:String,
+        var siteSlug:String,
+        var language: String,
+        var authorName:String,
+        var publishDate:String
 )

@@ -11,10 +11,10 @@ import com.rexonchen.readhub.model.entity.NewsList
 /**
  * Created by rexonchen on 2018/3/23.
  */
-@Dao
-interface NewsListDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertNewsList(newsList:NewsList)
-    @Query("SELECT * FROM newsList")
-    fun getNewsList():LiveData<NewsList>
-}
+//@Dao
+//interface NewsListDao {
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    fun insertNewsList(newsList:NewsList)
+//    @Query("SELECT * FROM newsList")
+//    fun getNewsList():LiveData<NewsList>
+//}

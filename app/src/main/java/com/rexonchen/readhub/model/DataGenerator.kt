@@ -1,63 +1,44 @@
 package com.rexonchen.readhub.model
 
+import android.arch.lifecycle.MutableLiveData
+import android.util.Log
 import com.rexonchen.readhub.model.entity.News
 import com.rexonchen.readhub.model.entity.NewsList
+import com.rexonchen.readhub.utils.network.ReadHubApi
+import com.rexonchen.readhub.utils.network.enqueue
 
 /**
  * Created by rexonchen on 2018/3/26.
  */
 object DataGenerator {
-    private val new1=News(
-            1L,
-            "King James",
-            "Lebron James got 60 points last night",
-            "Lebron James got 60 points last night",
-            "https://hupu.com",
-            "https://m.hupu.com",
-            "HUPU",
-            "hupu-china",
-            "Chinese",
-            "Yang Yi",
-            "2018-03-26")
-    private val new2=News(
-            2L,
-            "King James",
-            "Lebron James got 60 points last night",
-            "Lebron James got 60 points last night",
-            "https://hupu.com",
-            "https://m.hupu.com",
-            "HUPU",
-            "hupu-china",
-            "Chinese",
-            "Yang Yi",
-            "2018-03-26")
-    private val new3=News(
-            3L,
-            "King James",
-            "Lebron James got 60 points last night",
-            "Lebron James got 60 points last night",
-            "https://hupu.com",
-            "https://m.hupu.com",
-            "HUPU",
-            "hupu-china",
-            "Chinese",
-            "Yang Yi",
-            "2018-03-26")
+    val newsList = MutableLiveData<NewsList>()
+    val error = MutableLiveData<String>()
     fun generateNews():List<News>{
-
         val news= mutableListOf<News>()
-
-        news.add(new1)
-        news.add(new2)
-        news.add(new3)
+        getNewsList(System.currentTimeMillis())
         return news
     }
-    fun generateNewsList():NewsList{
+    fun generateNewsList():MutableLiveData<NewsList>{
         val news= mutableListOf<News>()
-        news.add(new1)
-        news.add(new2)
-        news.add(new3)
-        val newsList=NewsList(news,10,3,1)
+        getNewsList(System.currentTimeMillis())
         return newsList
+    }
+    fun getNewsList(lastCursor: Long = System.currentTimeMillis(), pageSize: Int = 10) {
+        ReadHubApi.apiService.news(lastCursor, pageSize).enqueue {
+            onResponse { _, response ->
+                Log.d("NewsListViewModel", "onResponse:${response?.body()?.pageSize}")
+                response?.let {
+                    newsList.value = it.body()
+                }
+            }
+            onFailure { _, t ->
+                if (t == null) {
+                    error.value = "Unknow Error"
+                } else {
+                    Log.e("NewsListViewModel", t.localizedMessage)
+                    error.value = t.toString()
+                }
+            }
+        }
     }
 }
