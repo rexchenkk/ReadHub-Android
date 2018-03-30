@@ -16,6 +16,7 @@ import com.rexonchen.readhub.utils.network.enqueue
  */
 class NewsListViewModel(application: Application): AndroidViewModel(application) {
     val news:MediatorLiveData<List<News>> = MediatorLiveData()
+    val newsTransfer:MediatorLiveData<News> = MediatorLiveData()
 
 
     init {

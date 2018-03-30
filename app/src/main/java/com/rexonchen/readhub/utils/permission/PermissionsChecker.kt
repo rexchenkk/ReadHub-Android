@@ -1,4 +1,4 @@
-package com.bihe0832.base.permission
+package com.rexonchen.readhub.utils.permission
 
 import android.content.Context
 import android.content.pm.PackageManager

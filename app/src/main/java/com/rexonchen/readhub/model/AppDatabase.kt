@@ -7,16 +7,10 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
-import android.util.Log
 import com.rexonchen.readhub.model.dao.NewsDao
-//import com.rexonchen.readhub.model.dao.NewsListDao
 import com.rexonchen.readhub.model.entity.News
-import com.rexonchen.readhub.utils.network.ReadHubApi
-import com.rexonchen.readhub.utils.network.enqueue
-//import com.rexonchen.readhub.model.entity.NewsList
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.delay
-import kotlinx.coroutines.experimental.lazyDefer
 
 /**
  * Created by rexonchen on 2018/3/21.
@@ -40,6 +34,7 @@ abstract class AppDatabase:RoomDatabase() {
 
 
 
+
     companion object {
         @Volatile
         private var sInstance:AppDatabase?=null
@@ -59,24 +54,27 @@ abstract class AppDatabase:RoomDatabase() {
                     .addCallback(object :RoomDatabase.Callback(){
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
-                            async {
-                                delay(4000)
-                                //TODO
-                                val newsList=DataGenerator.generateNewsList()
-                                val news=DataGenerator.generateNews()
-
-                                AppDatabase.getInstance(appContext).let{
-                                    it.runInTransaction {
-
-                                        news.forEach{x->it.newsDao().insertNews(x)}
-//                                        it.newsDao().insertNews(news)
-//                                        it.newsListDao().insertNewsList(newsList)
-                                    }
-                                    it.setDatabaseCreated()
-                                }
-                            }
+                            AppDatabase.getInstance(appContext).setDatabaseCreated()
+//                            async {
+////                                delay(4000)
+//                                //TODO
+//                                val newsList=DataGenerator.generateNewsList()
+//                                val news=DataGenerator.generateNews()
+//
+//                                AppDatabase.getInstance(appContext).let{
+//                                    it.runInTransaction {
+//                                        news.forEach{
+//                                            x->it.newsDao().insertNews(x) }
+////                                        it.newsDao().insertNews(news)
+////                                        it.newsListDao().insertNewsList(newsList)
+//                                    }
+//                                    it.setDatabaseCreated()
+//                                }
+//                            }
                         }
-                    }).build()
+                    })
+                    .allowMainThreadQueries()
+                    .build()
         }
 
     }

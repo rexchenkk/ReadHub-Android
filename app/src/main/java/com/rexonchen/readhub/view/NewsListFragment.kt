@@ -24,23 +24,27 @@ class NewsListFragment:Fragment(){
             = inflater.inflate(R.layout.news_list,container,false)
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        news_list.layoutManager=LinearLayoutManager(context)
-        news_list.adapter=mNewsAdapter
+        news_list_tv.layoutManager=LinearLayoutManager(context)
+        news_list_tv.adapter=mNewsAdapter
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val viewModel = ViewModelProviders.of(this).get(NewsListViewModel::class.java)
-        async {
-            delay(2000)
-            subscribeUi(viewModel)
-        }
+//        mNewsAdapter.setViewModel(viewModel)
+        subscribeUi(viewModel)
     }
 
     private fun subscribeUi(viewModel:NewsListViewModel){
         viewModel.news.observe(this, Observer<List<News>>{News->
-            if(News!=null)
+            if(News!=null){
                 mNewsAdapter.newsList=News
+                loading_tv.visibility=View.GONE
+                news_list_tv.visibility=View.VISIBLE
+            }else{
+                loading_tv.visibility=View.VISIBLE
+                news_list_tv.visibility=View.GONE
+            }
         })
     }
     companion object {
